@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+enum CURRENTLANE { LANEONE, LANETWO, LANETHREE, LANEFOUR };
+
 public class RedCarManager : MonoBehaviour
 {
     // Variables
+    // Objects
     public GameObject redCar;
     
     // Spawn Positions
@@ -17,21 +20,53 @@ public class RedCarManager : MonoBehaviour
     // Y-axis
     private float upperBounds = 1.0f;
     
-    // car needs to spawn on different lanes. Y spawn position is 1.0f. maybe spawn one at a time for now
+    private CURRENTLANE currentlane;
+    public int randomNumber;
     
+   [HideInInspector]
+   public bool redCarSpawned = false;
+   
     // Start is called before the first frame update
     void Start()
     {
-        // Instantiate Red Car
-        Instantiate(redCar, new Vector3(laneOneSpawn, upperBounds, 0.0f), redCar.transform.rotation);
-        //Instantiate(redCar, new Vector3(laneTwoSpawn, upperBounds, 0.0f), redCar.transform.rotation);
-        //Instantiate(redCar, new Vector3(laneThreeSpawn, upperBounds, 0.0f), redCar.transform.rotation);
-        //Instantiate(redCar, new Vector3(laneFourSpawn, upperBounds, 0.0f), redCar.transform.rotation);
+        currentlane = CURRENTLANE.LANEONE;
+        randomNumber = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+        currentlane = (CURRENTLANE)randomNumber;
+        
+        if (!redCarSpawned)
+        {
+            switch (currentlane)
+            {
+                case CURRENTLANE.LANEONE:
+                        Instantiate(redCar, new Vector3(laneOneSpawn, upperBounds, 0.0f), redCar.transform.rotation);
+                        redCarSpawned = true;
+
+                   // Debug.Log("Lane One");
+                    break;
+                case CURRENTLANE.LANETWO:
+                        Instantiate(redCar, new Vector3(laneTwoSpawn, upperBounds, 0.0f), redCar.transform.rotation);
+                        redCarSpawned = true;
+
+                    //Debug.Log("Lane Two");
+                    break;
+                case CURRENTLANE.LANETHREE:
+                        Instantiate(redCar, new Vector3(laneThreeSpawn, upperBounds, 0.0f), redCar.transform.rotation);
+                        redCarSpawned = true;
+                    
+                    //Debug.Log("Lane Three");
+                    break;
+                case CURRENTLANE.LANEFOUR:
+                        Instantiate(redCar, new Vector3(laneFourSpawn, upperBounds, 0.0f), redCar.transform.rotation);
+                        redCarSpawned = true;
+                   
+                    //Debug.Log("Lane Four");
+                    break;
+            }
+        }
     }
 }
