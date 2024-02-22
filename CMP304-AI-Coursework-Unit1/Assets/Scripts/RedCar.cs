@@ -18,10 +18,6 @@ public class RedCar : MonoBehaviour
         
         if (redCarManager == null)
             Debug.LogError("RedCarManager not found in the scene.");
-
-        redCarManager.randomNumber = Random.Range(0, 4);
-        
-        //Debug.Log("Next RandomNumber is set to Lane: " + redCarManager.randomNumber);
     }
 
     // Update is called once per frame
@@ -38,6 +34,8 @@ public class RedCar : MonoBehaviour
             if (redCarManager)
             {
                 redCarManager.redCarSpawned = false;
+                redCarManager.randomNumber = Random.Range(0, 4);
+                //Debug.Log("Next RandomNumber is set to Lane: " + redCarManager.randomNumber);
                 Destroy(gameObject);
             }
             else

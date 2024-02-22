@@ -65,7 +65,8 @@ public class FuzzyBox : MonoBehaviour {
 		{
 			Vector3 centre = new Vector3(0, 0, 0);
 			// Convert position of box to value between 0 and 100
-			double result = engine.Defuzzify(new { distance = (double)this.transform.position.x, speed = (double) Vector3.Distance(this.transform.position, centre) / Time.deltaTime});
+			double result = engine.Defuzzify(new { distance = (double)this.transform.position.x, 
+				speed = (double) Vector3.Distance(this.transform.position, centre) / Time.deltaTime});
 			//double velocityResult = engine.Defuzzify(new { speed });
 			Debug.Log("Result: " + result);
 
