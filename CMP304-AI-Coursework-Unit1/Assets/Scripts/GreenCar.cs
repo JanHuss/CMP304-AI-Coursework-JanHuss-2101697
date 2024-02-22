@@ -31,8 +31,8 @@ public class GreenCar : MonoBehaviour
     void Start()
     {
         // setup fuzzy inference system
-        redCarDistance = new LinguisticVariable("distance");
-        itemDistance = new LinguisticVariable("distance");
+        redCarDistance = new LinguisticVariable("redCarDistance");
+        itemDistance = new LinguisticVariable("itemDistance");
         direction = new LinguisticVariable("direction");
 
         engine = new FuzzyEngineFactory().Default();
@@ -77,8 +77,8 @@ public class GreenCar : MonoBehaviour
         // redistance: the cars position minus the blue line position
         // item: 
         double result = engine.Defuzzify(new
-            { distance = (double)this.transform.position.x + redCarManager.GetComponent<RedCarManager>().greenCarLookAtLane,
-                    cDistance = (double)this.transform.position.x - itemManager.GetComponent<ItemManager>().greenCarLookAtCoin
+            { redCarDistance = (double)this.transform.position.x + redCarManager.GetComponent<RedCarManager>().greenCarLookAtLane,
+                    itemDistance = (double)this.transform.position.x - itemManager.GetComponent<ItemManager>().greenCarLookAtCoin
             /*redCarDistance = (double)this.transform.position.x - aIGuideline.transform.position.x }*/});
 
         // debug lines
