@@ -21,6 +21,7 @@ public class GreenCar : MonoBehaviour
     // Fuzzy Logic Variables
     // fuzzy input
     private LinguisticVariable redCarDistance;
+    private LinguisticVariable redCarApproach;
     private LinguisticVariable itemDistance;
     // fuzzy output
     private LinguisticVariable direction;
@@ -32,6 +33,7 @@ public class GreenCar : MonoBehaviour
     {
         // setup fuzzy inference system
         redCarDistance = new LinguisticVariable("redCarDistance");
+        redCarApproach = new LinguisticVariable("redCarApproach");
         itemDistance = new LinguisticVariable("itemDistance");
         direction = new LinguisticVariable("direction");
 
@@ -42,6 +44,11 @@ public class GreenCar : MonoBehaviour
         var toRight = redCarDistance.MembershipFunctions.AddTriangle("toRight", 0.05f, 0.3f, 0.47f);
         var offRoadLeft = redCarDistance.MembershipFunctions.AddTriangle("offRoadLeft", -2.05f, -0.48f, -0.42f);
         var offRoadRight = redCarDistance.MembershipFunctions.AddTriangle("offRoadRight", 0.42f, 0.48f, 2.05f);
+        
+        // Input: distance to approaching red car
+        var far = redCarApproach.MembershipFunctions.AddTriangle("far", -0.47f, -0.3f, -0.05f);
+        var close = redCarApproach.MembershipFunctions.AddTriangle("close", 0.05f, 0.3f, 0.47f);
+        
         // Input: distance to closest item
         var cToLeft = itemDistance.MembershipFunctions.AddTriangle("item", -0.47f, -0.3f, -0.05f);
         var cNoDist = itemDistance.MembershipFunctions.AddTriangle("itemNoDist", -0.2f, 0.0f, 0.2f);
@@ -61,14 +68,19 @@ public class GreenCar : MonoBehaviour
         var ruleTwo = Rule.If(redCarDistance.Is(toRight)).Then(direction.Is(goLeft));
         var ruleThree = Rule.If(redCarDistance.Is(offRoadLeft)).Then(direction.Is(goRight));
         var ruleFour = Rule.If(redCarDistance.Is(offRoadRight)).Then(direction.Is(goLeft));
-        //var ruleFive = Rule.If(redCarDistance.Is(noDist)).Then(direction.Is(goLeft));
+        // Rules: green car approaching red car
+        var ruleEight = Rule.If(redCarApproach.Is(far)).Then(direction.Is(isCentred));
+        var ruleNine = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toLeft))).Then(direction.Is(goRight));
+        var ruleTen = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toRight))).Then(direction.Is(goLeft));
         // Rules: green car approaching items
         var ruleFive = Rule.If(itemDistance.Is(cToLeft)).Then(direction.Is(goRight));
         var ruleSix = Rule.If(itemDistance.Is(cNoDist)).Then(direction.Is(isCentred));
         var ruleSeven = Rule.If(itemDistance.Is(cToRight)).Then(direction.Is(goLeft));
         
+        
         // add rules to fuzzy engine 
-        engine.Rules.Add(ruleOne, ruleTwo, ruleThree, ruleFour, ruleFive, ruleSix, ruleSeven);
+        engine.Rules.Add(ruleOne, ruleTwo, ruleThree, ruleFour, ruleFive, 
+                                    ruleSix, ruleSeven, ruleEight, ruleNine, ruleTen);
     }
 
     private void FixedUpdate()
@@ -78,7 +90,8 @@ public class GreenCar : MonoBehaviour
         // item: 
         double result = engine.Defuzzify(new
             { redCarDistance = (double)this.transform.position.x + redCarManager.GetComponent<RedCarManager>().greenCarLookAtLane,
-                    itemDistance = (double)this.transform.position.x - itemManager.GetComponent<ItemManager>().greenCarLookAtCoin
+                    itemDistance = (double)this.transform.position.x - itemManager.GetComponent<ItemManager>().greenCarLookAtCoin,
+                    redCarApproach = (double)this.transform.position.y + redCarManager.GetComponent<RedCarManager>().greenCarLookAtLane
             /*redCarDistance = (double)this.transform.position.x - aIGuideline.transform.position.x }*/});
 
         // debug lines

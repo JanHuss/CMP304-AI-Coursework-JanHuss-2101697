@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI_Car_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 3191974143685635607, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6202843175281641944, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: aIGuideline
       value: 
@@ -168,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7260326473816534345, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: -0.346
       objectReference: {fileID: 0}
     - target: {fileID: 7260326473816534345, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: m_LocalPosition.z
