@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - GreenCar
+  - coin
+  - RedCar
   layers:
   - Default
   - TransparentFX

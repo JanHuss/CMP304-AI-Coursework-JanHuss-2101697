@@ -69,9 +69,9 @@ public class GreenCar : MonoBehaviour
         var ruleThree = Rule.If(redCarDistance.Is(offRoadLeft)).Then(direction.Is(goRight));
         var ruleFour = Rule.If(redCarDistance.Is(offRoadRight)).Then(direction.Is(goLeft));
         // Rules: green car approaching red car
-        var ruleEight = Rule.If(redCarApproach.Is(far)).Then(direction.Is(isCentred));
-        var ruleNine = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toLeft))).Then(direction.Is(goRight));
-        var ruleTen = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toRight))).Then(direction.Is(goLeft));
+       //var ruleEight = Rule.If(redCarApproach.Is(far)).Then(direction.Is(isCentred));
+       var ruleNine = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toLeft))).Then(direction.Is(goRight));
+       var ruleTen = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toRight))).Then(direction.Is(goLeft));
         // Rules: green car approaching items
         var ruleFive = Rule.If(itemDistance.Is(cToLeft)).Then(direction.Is(goRight));
         var ruleSix = Rule.If(itemDistance.Is(cNoDist)).Then(direction.Is(isCentred));
@@ -80,18 +80,21 @@ public class GreenCar : MonoBehaviour
         
         // add rules to fuzzy engine 
         engine.Rules.Add(ruleOne, ruleTwo, ruleThree, ruleFour, ruleFive, 
-                                    ruleSix, ruleSeven, ruleEight, ruleNine, ruleTen);
+                                    ruleSix, ruleSeven, /*ruleEight,*/ ruleNine, ruleTen);
     }
 
     private void FixedUpdate()
     {
+        Vector2 coinPos = GameObject.FindGameObjectWithTag("coin").transform.position;
+        Vector2 redCarPos = GameObject.FindGameObjectWithTag("RedCar").transform.position;
         // defuzzify values into precise values
         // redistance: the cars position minus the blue line position
         // item: 
         double result = engine.Defuzzify(new
-            { redCarDistance = (double)this.transform.position.x + redCarManager.GetComponent<RedCarManager>().greenCarLookAtLane,
-                    itemDistance = (double)this.transform.position.x - itemManager.GetComponent<ItemManager>().greenCarLookAtCoin,
-                    redCarApproach = (double)this.transform.position.y + redCarManager.GetComponent<RedCarManager>().greenCarLookAtLane
+            { redCarDistance = (double)this.transform.position.x + redCarPos.x,
+                    redCarApproach = (double)this.transform.position.y + redCarPos.y,
+                    itemDistance = (double)this.transform.position.x - coinPos.x,
+                    //itemDistance = (double)this.transform.position.y - coinPos.y
             /*redCarDistance = (double)this.transform.position.x - aIGuideline.transform.position.x }*/});
 
         // debug lines
