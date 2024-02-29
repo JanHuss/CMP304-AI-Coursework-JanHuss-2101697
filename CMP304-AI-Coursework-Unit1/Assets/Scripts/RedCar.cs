@@ -8,13 +8,18 @@ public class RedCar : MonoBehaviour
 {
     // Variables
     public float redCarSpeed;
-    private float lowerBounds = -1.0f;
-    
+    private float lowerBounds;
+    private ParallaxRoad parallaxRoad;
     private RedCarManager redCarManager;
 
     private void Start()
     {
         redCarManager = GameObject.FindObjectOfType<RedCarManager>();
+        parallaxRoad = GameObject.FindObjectOfType<ParallaxRoad>();
+        if (!parallaxRoad.isLongRoad)
+            lowerBounds = -1.0f;
+        else
+            lowerBounds = -3.0f;
         
         if (redCarManager == null)
             Debug.LogError("RedCarManager not found in the scene.");

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 enum CURRENTLANE { LANEONE, LANETWO, LANETHREE, LANEFOUR };
 
@@ -10,6 +11,7 @@ public class RedCarManager : MonoBehaviour
     // Variables
     // Objects
     public GameObject redCar;
+    private ParallaxRoad parallaxRoad;
     
     // Spawn Positions
     // X-axis
@@ -21,7 +23,9 @@ public class RedCarManager : MonoBehaviour
     [HideInInspector] public float greenCarLookAtLane;
     
     // Y-axis
-    private float upperBounds = 1.0f;
+    private float upperBounds;
+
+    public bool isLongRoad;
 
     private CURRENTLANE currentlane;
     [HideInInspector] public int randomNumber;
@@ -31,6 +35,13 @@ public class RedCarManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        parallaxRoad = GameObject.FindObjectOfType<ParallaxRoad>();
+        
+        if (!parallaxRoad.isLongRoad)
+            upperBounds = Random.Range(1.0f, 2.0f);
+        else
+            upperBounds = Random.Range(3.0f, 5.0f);
+        
         currentlane = CURRENTLANE.LANEONE;
         randomNumber = 0;
     }

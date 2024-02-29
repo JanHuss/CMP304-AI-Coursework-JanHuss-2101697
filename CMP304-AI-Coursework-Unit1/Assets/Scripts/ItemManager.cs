@@ -7,6 +7,7 @@ public class ItemManager : MonoBehaviour
     // Variables
     // Objects
     public GameObject coin;
+    private ParallaxRoad parallaxRoad;
     
     // Spawn Positions
     // X-axis
@@ -19,6 +20,8 @@ public class ItemManager : MonoBehaviour
     
     // Y-axis
     private float upperBounds = 1.0f;
+    
+    public bool isLongRoad;
 
     private CURRENTLANE currentlane;
     [HideInInspector] public int randomNumber;
@@ -29,6 +32,13 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        parallaxRoad = GameObject.FindObjectOfType<ParallaxRoad>();
+        
+        if (!parallaxRoad.isLongRoad)
+            upperBounds = Random.Range(1.0f, 2.0f);
+        else
+            upperBounds = Random.Range(3.0f, 5.0f);
+        
         currentlane = CURRENTLANE.LANEONE;
         randomNumber = 2;
         coinsCollected = 0;

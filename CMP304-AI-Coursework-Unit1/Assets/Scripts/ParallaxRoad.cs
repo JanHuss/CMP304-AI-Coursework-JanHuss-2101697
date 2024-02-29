@@ -9,13 +9,23 @@ public class ParallaxRoad : MonoBehaviour
     private float greenCarSpeed;
     private float lowestPoint;
     private Vector3 highestPoint;
+
+    public bool isLongRoad;
     
     // Start is called before the first frame update
     void Start()
     {
         greenCarSpeed = GameObject.Find("AI_Car_Green").GetComponent<GreenCar>().greenCarSpeed;
-        lowestPoint = -1.8f;
-        highestPoint = new Vector3(0,1.75f,0);
+        if (!isLongRoad)
+        {
+            lowestPoint = -1.8f;
+            highestPoint = new Vector3(0,1.75f,0);
+        }
+        else
+        {
+            lowestPoint = -6.85f;
+            highestPoint = new Vector3(0, 7, 0);
+        }
         
     }
 
