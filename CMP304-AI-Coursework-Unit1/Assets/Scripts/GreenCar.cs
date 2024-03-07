@@ -61,6 +61,9 @@ public class GreenCar : MonoBehaviour
         var itemFar = redCarApproach.MembershipFunctions.AddTriangle("itemFar", -0.47f, -0.3f, -0.05f);
         var itemClose = redCarApproach.MembershipFunctions.AddTriangle("itemClose", 0.05f, 0.3f, 0.47f);
         
+        // if the red car approach is close and the item approach is far and the red car distance is to the left, then stay centred
+        // if the red car is 
+        
         // Output: how the green car should react
         //var goLeft = direction.MembershipFunctions.AddTriangle("goLeft", -0.47f, -0.15f, 0.2f);
         ////var isCentred = direction.MembershipFunctions.AddTriangle("isCentred", -0.3f, 0.0f, 0.3f);
@@ -71,26 +74,66 @@ public class GreenCar : MonoBehaviour
         var goRight = direction.MembershipFunctions.AddTriangle("goRight", -0.1f, 0.3f, 0.47f);
         
         // Rules: green car avoiding red cars
-        var ruleOne = Rule.If(redCarDistance.Is(toLeft)).Then(direction.Is(goRight));
-        var ruleTwo = Rule.If(redCarDistance.Is(toRight)).Then(direction.Is(goLeft));
-        var ruleThree = Rule.If(redCarDistance.Is(offRoadLeft)).Then(direction.Is(goRight));
-        var ruleFour = Rule.If(redCarDistance.Is(offRoadRight)).Then(direction.Is(goLeft));
-        // Rules: green car approaching red car
-        //var ruleEight = Rule.If(redCarApproach.Is(far)).Then(direction.Is(isCentred));
-        var ruleNine = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toLeft))).Then(direction.Is(goRight));
-        var ruleTen = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toRight))).Then(direction.Is(goLeft));
-        // Rules: green car going to items
-        var ruleFive = Rule.If(itemDistance.Is(cToLeft)).Then(direction.Is(goRight));
-        var ruleSix = Rule.If(itemDistance.Is(cNoDist)).Then(direction.Is(isCentred));
-        var ruleSeven = Rule.If(itemDistance.Is(cToRight)).Then(direction.Is(goLeft));
-        //Rules: green car approaching items
-        var ruleEleven = Rule.If(itemApproach.Is(itemFar).And(itemDistance.Is(cToLeft))).Then(direction.Is(goLeft));
-        var ruleTwelve = Rule.If(itemApproach.Is(itemFar).And(itemDistance.Is(cToRight))).Then(direction.Is(goRight));
+        //var ruleOne = Rule.If(redCarDistance.Is(toLeft)).Then(direction.Is(goRight));
+        //var ruleTwo = Rule.If(redCarDistance.Is(toRight)).Then(direction.Is(goLeft));
+        //var ruleThree = Rule.If(redCarDistance.Is(offRoadLeft)).Then(direction.Is(goRight));
+        //var ruleFour = Rule.If(redCarDistance.Is(offRoadRight)).Then(direction.Is(goLeft));
+        //// Rules: green car approaching red car
+        ////var ruleEight = Rule.If(redCarApproach.Is(far)).Then(direction.Is(isCentred));
+        //var ruleNine = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toLeft))).Then(direction.Is(goRight));
+        //var ruleTen = Rule.If(redCarApproach.Is(close).And(redCarDistance.Is(toRight))).Then(direction.Is(goLeft));
+        //// Rules: green car going to items
+        //var ruleFive = Rule.If(itemDistance.Is(cToLeft)).Then(direction.Is(goRight));
+        //var ruleSix = Rule.If(itemDistance.Is(cNoDist)).Then(direction.Is(isCentred));
+        //var ruleSeven = Rule.If(itemDistance.Is(cToRight)).Then(direction.Is(goLeft));
+        ////Rules: green car approaching items
+        //var ruleEleven = Rule.If(itemApproach.Is(itemFar).And(itemDistance.Is(cToLeft))).Then(direction.Is(goLeft));
+        //var ruleTwelve = Rule.If(itemApproach.Is(itemFar).And(itemDistance.Is(cToRight))).Then(direction.Is(goRight));
         
+        var ruleOne = Rule.If(redCarDistance.Is(toRight).And(itemDistance.Is(cToRight)).And(redCarApproach.Is(close)).And(itemApproach.Is(itemFar))).Then(direction.Is(isCentred));
+        var ruleTwo = Rule.If(redCarDistance.Is(toLeft).And(itemDistance.Is(cToLeft)).And(redCarApproach.Is(close)).And(itemApproach.Is(itemFar))).Then(direction.Is(isCentred));
+        var ruleThree = Rule.If(redCarDistance.Is(toRight).And(itemDistance.Is(cToRight)).And(redCarApproach.Is(far)).And(itemApproach.Is(itemClose))).Then(direction.Is(goRight));
+        var ruleFour = Rule.If(redCarDistance.Is(toLeft).And(itemDistance.Is(cToLeft)).And(redCarApproach.Is(far)).And(itemApproach.Is(itemClose))).Then(direction.Is(goLeft));
+        var ruleFive = Rule.If(redCarDistance.Is(toRight).And(redCarApproach.Is(close))).Then(direction.Is(goLeft));
+        var ruleSix = Rule.If(redCarDistance.Is(toLeft).And(redCarApproach.Is(close))).Then(direction.Is(goRight));
+        var ruleSeven = Rule.If(redCarDistance.Is(toRight).And(redCarApproach.Is(far))).Then(direction.Is(isCentred));
+        var ruleEight = Rule.If(redCarDistance.Is(toLeft).And(redCarApproach.Is(far))).Then(direction.Is(isCentred));
+        var ruleNine = Rule.If(itemDistance.Is(cToRight).And(itemApproach.Is(itemClose))).Then(direction.Is(goRight));
+        var ruleTen = Rule.If(itemDistance.Is(cToLeft).And(itemApproach.Is(itemClose))).Then(direction.Is(goLeft));
+        var ruleEleven = Rule.If(itemDistance.Is(cToRight).And(itemApproach.Is(itemFar))).Then(direction.Is(goRight));
+        var ruleTwelve = Rule.If(itemDistance.Is(cToLeft).And(itemApproach.Is(itemFar))).Then(direction.Is(goLeft));
+        var ruleThirteen = Rule.If(redCarDistance.Is(cNoDist).And(itemDistance.Is(cToRight))).Then(direction.Is(goRight));
+        var ruleFourteen = Rule.If(redCarDistance.Is(cNoDist).And(itemDistance.Is(cToLeft))).Then(direction.Is(goLeft));
+        var ruleFifteen = Rule.If(itemDistance.Is(cNoDist).And(redCarDistance.Is(toRight))).Then(direction.Is(isCentred));
+        var ruleSixteen = Rule.If(itemDistance.Is(cNoDist).And(redCarDistance.Is(toLeft))).Then(direction.Is(isCentred));
+        var ruleNineteen = Rule.If(redCarDistance.Is(offRoadRight)).Then(direction.Is(isCentred));
+        var ruleTwenty = Rule.If(redCarDistance.Is(offRoadLeft)).Then(direction.Is(isCentred));
+        var ruleTwentyOne = Rule.If(redCarDistance.Is(offRoadRight).And(itemDistance.Is(cToRight))).Then(direction.Is(goRight));
+        var ruleTwentyTwo = Rule.If(redCarDistance.Is(offRoadLeft).And(itemDistance.Is(cToLeft))).Then(direction.Is(goLeft));
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
+       //var rule = Rule.If().Then(direction.);
         
         // add rules to fuzzy engine 
         engine.Rules.Add(ruleOne, ruleTwo, ruleThree, ruleFour, ruleFive, 
-                                    ruleSix, ruleSeven, /*ruleEight,*/ ruleNine, ruleTen, ruleEleven, ruleTwelve);
+                                    ruleSix, ruleSeven, ruleEight, ruleNine, ruleTen, ruleEleven, ruleTwelve,
+                                    ruleThirteen, ruleFourteen, ruleFifteen, ruleSixteen, ruleNineteen, ruleTwenty,
+                                    ruleTwentyOne, ruleTwentyTwo);
     }
 
     private void FixedUpdate()
