@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 enum CURRENTLANE { LANEONE, LANETWO, LANETHREE, LANEFOUR };
@@ -30,8 +31,9 @@ public class RedCarManager : MonoBehaviour
 
     private CURRENTLANE currentlane;
     [HideInInspector] public int randomNumber;
-    
     [HideInInspector] public bool redCarSpawned = false;
+    public int carsCollidedWith;
+    public int totalCars;
    
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,8 @@ public class RedCarManager : MonoBehaviour
         
         currentlane = CURRENTLANE.LANEONE;
         randomNumber = 0;
+        carsCollidedWith = 0;
+        totalCars = 0;
     }
 
     // Update is called once per frame

@@ -43,9 +43,9 @@ public class Coin : MonoBehaviour
             if (itemManager)
             {
                 itemManager.coinSpawned = false;
-                itemManager.coinsCollected -= 1;
+                itemManager.totalCoins += 1;
                 itemManager.randomNumber = Random.Range(0, 4);
-                Debug.Log("Next RandomNumber for item is set to Lane: " + itemManager.randomNumber);
+                //Debug.Log("Next RandomNumber for item is set to Lane: " + itemManager.randomNumber);
                 Destroy(gameObject);
             }
             else
@@ -61,6 +61,7 @@ public class Coin : MonoBehaviour
         {
             itemManager.coinSpawned = false;
             itemManager.coinsCollected += 1;
+            itemManager.totalCoins += 1;
             itemManager.randomNumber = Random.Range(0, 4);
             Destroy(gameObject);
         }

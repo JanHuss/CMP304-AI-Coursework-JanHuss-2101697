@@ -28,6 +28,7 @@ public class ItemManager : MonoBehaviour
     [HideInInspector] public int randomNumber;
     [HideInInspector] public bool coinSpawned = false;
     public int coinsCollected;
+    public int totalCoins;
     
     
     // Start is called before the first frame update
@@ -44,6 +45,7 @@ public class ItemManager : MonoBehaviour
         currentlane = CURRENTLANE.LANEONE;
         randomNumber = 2;
         coinsCollected = 0;
+        totalCoins = 0;
     }
 
     // Update is called once per frame

@@ -353,6 +353,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6202843175281641944, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
+      propertyPath: addCar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202843175281641944, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
+      propertyPath: addItem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202843175281641944, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: aIGuideline
       value: 
       objectReference: {fileID: 1385941420}
@@ -370,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7260326473816534345, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.04
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 7260326473816534345, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: m_LocalPosition.z

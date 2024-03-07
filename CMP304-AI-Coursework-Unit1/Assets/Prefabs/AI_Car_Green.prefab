@@ -106,7 +106,6 @@ MonoBehaviour:
   greenCarStartPosX: 0.15
   greenCarSpeed: 20
   twelveRules: 1
-  twentyFourRules: 0
   addCar: 0
   addItem: 1
 --- !u!50 &3191974143685635607

@@ -40,6 +40,7 @@ public class RedCar : MonoBehaviour
             if (redCarManager)
             {
                 redCarManager.redCarSpawned = false;
+                redCarManager.totalCars += 1;
                 redCarManager.randomNumber = Random.Range(0, 4);
                 //Debug.Log("Next RandomNumber is set to Lane: " + redCarManager.randomNumber);
                 Destroy(gameObject);
@@ -48,6 +49,18 @@ public class RedCar : MonoBehaviour
             {
                 Debug.LogError("RedCarManager reference is null.");
             }
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "GreenCar")
+        {
+            redCarManager.redCarSpawned = false;
+            redCarManager.carsCollidedWith += 1;
+            redCarManager.totalCars += 1;
+            redCarManager.randomNumber = Random.Range(0, 4);
+            Destroy(gameObject);
         }
     }
 }

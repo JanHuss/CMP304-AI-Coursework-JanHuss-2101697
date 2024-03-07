@@ -18,9 +18,9 @@ public class GreenCar : MonoBehaviour
     public float greenCarSpeed;
     private Vector3 guideLinePos;
     public bool twelveRules;
-    public bool twentyFourRules;
     public bool addCar;
     public bool addItem;
+    private float greenCarYPos;
     
     // Fuzzy Logic Variables
     // fuzzy input
@@ -37,6 +37,8 @@ public class GreenCar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        greenCarYPos = -1.03f;
+        
         // setup fuzzy inference system
         redCarDistance = new LinguisticVariable("redCarDistance");
         redCarApproach = new LinguisticVariable("redCarApproach");
@@ -79,7 +81,7 @@ public class GreenCar : MonoBehaviour
         var isCentred = direction.MembershipFunctions.AddTriangle("isCentred", -0.3f, 0.0f, 0.3f);
         var goRight = direction.MembershipFunctions.AddTriangle("goRight", -0.1f, 0.3f, 0.47f);
 
-        if (twelveRules) {
+       // if (twelveRules) {
             // Rules: green car avoiding red cars
             var ruleOne = Rule.If(redCarDistance.Is(toLeft)).Then(direction.Is(goRight));
             var ruleTwo = Rule.If(redCarDistance.Is(toRight)).Then(direction.Is(goLeft));
@@ -100,7 +102,6 @@ public class GreenCar : MonoBehaviour
             var ruleEleven = Rule.If(itemApproach.Is(itemFar).And(itemDistance.Is(cToLeft))).Then(direction.Is(goLeft));
             var ruleTwelve = Rule.If(itemApproach.Is(itemFar).And(itemDistance.Is(cToRight))).Then(direction.Is(goRight));
             
-            
             // add rules to fuzzy engine 
             if (addCar && !addItem) {
                 engine.Rules.Add(ruleOne, ruleTwo, ruleThree, ruleFour,
@@ -114,7 +115,7 @@ public class GreenCar : MonoBehaviour
             engine.Rules.Add(ruleOne, ruleTwo, ruleThree, ruleFour, ruleFive, 
                 ruleSix, ruleSeven, ruleNine, ruleTen, ruleEleven, ruleTwelve, ruleThirteen, ruleFourteen);
             }
-        }
+        //}
         //else if (twentyFourRules) {
         //    var ruleOne = Rule.If(redCarDistance.Is(toRight).And(itemDistance.Is(cToRight)).And(redCarApproach.Is(close)).And(itemApproach.Is(itemFar))).Then(direction.Is(isCentred));
         //    var ruleTwo = Rule.If(redCarDistance.Is(toLeft).And(itemDistance.Is(cToLeft)).And(redCarApproach.Is(close)).And(itemApproach.Is(itemFar))).Then(direction.Is(isCentred));
@@ -157,7 +158,7 @@ public class GreenCar : MonoBehaviour
             Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
             rigidbody.AddForce(new Vector3((float)(result), 0.0f, 0.0f));
         }
-        else if (addItem && !addCar) {
+        else if (!addCar && addItem) {
             Vector2 coinPos = GameObject.FindGameObjectWithTag("coin").transform.position;
             // defuzzify values into precise values
             double result = engine.Defuzzify(new
