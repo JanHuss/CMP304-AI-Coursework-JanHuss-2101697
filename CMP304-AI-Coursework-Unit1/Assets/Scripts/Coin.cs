@@ -13,7 +13,6 @@ public class Coin : MonoBehaviour
 
     private ItemManager itemManager;
     private ParallaxRoad parallaxRoad;
-    public GreenCar greenCar;
     
     // Start is called before the first frame update
     void Start()

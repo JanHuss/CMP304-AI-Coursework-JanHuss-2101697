@@ -12,6 +12,7 @@ public class RedCarManager : MonoBehaviour
     // Objects
     public GameObject redCar;
     private ParallaxRoad parallaxRoad;
+    private GreenCar greenCar;
     
     // Spawn Positions
     // X-axis
@@ -36,6 +37,7 @@ public class RedCarManager : MonoBehaviour
     void Start()
     {
         parallaxRoad = GameObject.FindObjectOfType<ParallaxRoad>();
+        greenCar = GameObject.FindObjectOfType<GreenCar>();
         
         if (!parallaxRoad.isLongRoad)
             upperBounds = Random.Range(1.0f, 2.0f);
@@ -51,7 +53,7 @@ public class RedCarManager : MonoBehaviour
     {
         currentlane = (CURRENTLANE)randomNumber;
         
-        if (!redCarSpawned)
+        if (!redCarSpawned && greenCar.addCar)
         {
             switch (currentlane)
             {

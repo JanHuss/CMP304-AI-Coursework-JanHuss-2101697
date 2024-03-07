@@ -16,6 +16,7 @@ public class RedCar : MonoBehaviour
     {
         redCarManager = GameObject.FindObjectOfType<RedCarManager>();
         parallaxRoad = GameObject.FindObjectOfType<ParallaxRoad>();
+        
         if (!parallaxRoad.isLongRoad)
             lowerBounds = -1.0f;
         else

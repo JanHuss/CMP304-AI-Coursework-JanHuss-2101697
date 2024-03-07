@@ -8,6 +8,7 @@ public class ItemManager : MonoBehaviour
     // Objects
     public GameObject coin;
     private ParallaxRoad parallaxRoad;
+    private GreenCar greenCar;
     
     // Spawn Positions
     // X-axis
@@ -33,6 +34,7 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
         parallaxRoad = GameObject.FindObjectOfType<ParallaxRoad>();
+        greenCar = GameObject.FindObjectOfType<GreenCar>();
         
         if (!parallaxRoad.isLongRoad)
             upperBounds = Random.Range(1.0f, 2.0f);
@@ -49,7 +51,7 @@ public class ItemManager : MonoBehaviour
     {
         currentlane = (CURRENTLANE)randomNumber;
         
-        if (!coinSpawned)
+        if (!coinSpawned && greenCar.addItem)
         {
             switch (currentlane)
             {
