@@ -1376,7 +1376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6202843175281641944, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: addCar
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6202843175281641944, guid: 3aa9d0c7ddbff69429c571eaec28997e, type: 3}
       propertyPath: addItem

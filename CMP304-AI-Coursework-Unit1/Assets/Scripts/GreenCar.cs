@@ -76,25 +76,25 @@ public class GreenCar : MonoBehaviour
         #endregion
         #region PhaseTwoInputs
         // Input: distance to closest red car
-        var toLeft = redCarDistance.MembershipFunctions.AddTriangle("toLeft", -0.47f, -0.3f, 0.05f);
-        var toRight = redCarDistance.MembershipFunctions.AddTriangle("toRight", -0.05f, 0.3f, 0.47f);
-        var offRoadLeft = redCarDistance.MembershipFunctions.AddTriangle("offRoadLeft", -2.05f, -0.48f, -0.42f);
-        var offRoadRight = redCarDistance.MembershipFunctions.AddTriangle("offRoadRight", 0.42f, 0.48f, 2.05f);
+        var toLeft = redCarDistance.MembershipFunctions.AddTriangle("toLeft", -1.0f, -0.1f, 0.01f);
+        var toRight = redCarDistance.MembershipFunctions.AddTriangle("toRight", -0.01f, 0.1f, 1.0f);
+        var offRoadLeft = redCarDistance.MembershipFunctions.AddTriangle("offRoadLeft", -1.7f, -0.48f, -0.3f);
+        var offRoadRight = redCarDistance.MembershipFunctions.AddTriangle("offRoadRight", 0.3f, 0.48f, 1.7f);
             
         // Input: distance to approaching red car
-        var far = redCarApproach.MembershipFunctions.AddTriangle("far", -0.47f, -0.3f, 0.01f);
-        var close = redCarApproach.MembershipFunctions.AddTriangle("close", -0.01f, 0.3f, 0.47f);
+        var far = redCarApproach.MembershipFunctions.AddTriangle("far", -0.47f, -0.47f, 0.01f);
+        var close = redCarApproach.MembershipFunctions.AddTriangle("close", -0.01f, 0.47f, 0.47f);
             
         // Input: distance to closest item
-        var cToLeft = itemDistance.MembershipFunctions.AddTriangle("itemToLeft", -0.47f, -0.3f, -0.05f);
-        var cNoDist = itemDistance.MembershipFunctions.AddTriangle("itemNoDist", -0.2f, 0.0f, 0.2f);
-        var cToRight = itemDistance.MembershipFunctions.AddTriangle("itemToRight", 0.05f, 0.3f, 0.47f);
-        var itemOffRoadLeft = itemDistance.MembershipFunctions.AddTriangle("itemOffRoadLeft", -2.05f, -0.48f, -0.42f);
-        var itemOffRoadRight = itemDistance.MembershipFunctions.AddTriangle("itemOffRoadRight", 0.42f, 0.48f, 2.05f);
+        var cToLeft = itemDistance.MembershipFunctions.AddTriangle("itemToLeft", -1.7f, -1.3f, -0.0f);
+        var cNoDist = itemDistance.MembershipFunctions.AddTriangle("itemNoDist", -0.3f, 0.0f, 0.3f);
+        var cToRight = itemDistance.MembershipFunctions.AddTriangle("itemToRight", 0.0f, 1.3f, 1.7f);
+        var itemOffRoadLeft = itemDistance.MembershipFunctions.AddTriangle("itemOffRoadLeft", -2.05f, -1.9f, -0.95f);
+        var itemOffRoadRight = itemDistance.MembershipFunctions.AddTriangle("itemOffRoadRight", 0.95f, 1.9f, 2.05f);
             
         // Input: distance to approaching item
-        var itemFar = redCarApproach.MembershipFunctions.AddTriangle("itemFar", -0.47f, -0.3f, 0.05f);
-        var itemClose = redCarApproach.MembershipFunctions.AddTriangle("itemClose", -0.05f, 0.3f, 0.47f);
+        var itemFar = redCarApproach.MembershipFunctions.AddTriangle("itemFar", -0.47f, -0.47f, 0.05f);
+        var itemClose = redCarApproach.MembershipFunctions.AddTriangle("itemClose", -0.05f, 0.47f, 0.47f);
 
         #endregion
 
