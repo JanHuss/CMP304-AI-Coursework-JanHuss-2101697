@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using FLS;
 using FLS.Rules;
 using FLS.MembershipFunctions;
@@ -74,7 +75,7 @@ public class GreenCar : MonoBehaviour
             //var itemClose = redCarApproach.MembershipFunctions.AddTriangle("itemClose", -0.05f, 0.3f, 0.47f);
 
         #endregion
-        #region PhaseTwoInputs
+        #region PhaseTwoAndThreeInputs
         // Input: distance to closest red car
         var toLeft = redCarDistance.MembershipFunctions.AddTriangle("toLeft", -1.0f, -0.1f, 0.01f);
         var toRight = redCarDistance.MembershipFunctions.AddTriangle("toRight", -0.01f, 0.1f, 1.0f);
@@ -101,9 +102,16 @@ public class GreenCar : MonoBehaviour
         // Outputs
         #region PhaseOneAndTwoOutputs
             // Output: how the green car should react
-            var goLeft = direction.MembershipFunctions.AddTriangle("goLeft", -0.47f, -0.3f, 0.1f);
-            var isCentred = direction.MembershipFunctions.AddTriangle("isCentred", -0.3f, 0.0f, 0.3f);
-            var goRight = direction.MembershipFunctions.AddTriangle("goRight", -0.1f, 0.3f, 0.47f);
+           //var goLeft = direction.MembershipFunctions.AddTriangle("goLeft", -0.47f, -0.3f, 0.1f);
+           //var isCentred = direction.MembershipFunctions.AddTriangle("isCentred", -0.3f, 0.0f, 0.3f);
+           //var goRight = direction.MembershipFunctions.AddTriangle("goRight", -0.1f, 0.3f, 0.47f);
+
+        #endregion
+        #region PhaseThreeOutputs
+        // Output: how the green car should react
+        var goLeft = direction.MembershipFunctions.AddTriangle("goLeft", -0.47f, -0.45f, -0.34f);
+        var isCentred = direction.MembershipFunctions.AddTriangle("isCentred", -0.36f, 0.0f, 0.36f);
+        var goRight = direction.MembershipFunctions.AddTriangle("goRight", 0.34f, 0.45f, 0.47f);
 
         #endregion
 
@@ -585,5 +593,13 @@ public class GreenCar : MonoBehaviour
         /*// setting the results of the fuzzy logic to the car's rigidbody2d and apply force on the X-Axis
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.AddForce(new Vector3((float)(result), 0.0f, 0.0f));*/
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Splash");
+        }
     }
 }

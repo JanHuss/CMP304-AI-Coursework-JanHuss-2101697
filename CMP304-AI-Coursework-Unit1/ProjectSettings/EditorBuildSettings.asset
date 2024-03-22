@@ -9,6 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/ShortRoad.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/LongRoad.unity
+    path: Assets/Scenes/Splash.unity
+    guid: c74791700b81fdd458bc61add85008c2
+  - enabled: 1
+    path: Assets/Scenes/LongRoadCoin.unity
     guid: 0367d5ab5dfd78d43806e93a07790396
+  - enabled: 1
+    path: Assets/Scenes/LongRoadCar.unity
+    guid: a45caef91a01ed24f892eeb0822e075f
+  - enabled: 1
+    path: Assets/Scenes/LongRoadCoinCar.unity
+    guid: d726a56a99a1c7a4ba1dc604709fa777
+  - enabled: 1
+    path: Assets/Scenes/LongRoadCoinCar120.unity
+    guid: 025f34a3ac4db834eb2ace08adbc5601
   m_configObjects: {}
